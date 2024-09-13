@@ -179,12 +179,14 @@ def main(deck_name):
 
         # Use Cambridge by default then go to VocalWare 
         audio_url = get_cambridge_tts_url(word)
+        file_name = "cambridge"
         if not audio_url:
             audio_url = get_vocalware_tts_url(word)
+            file_name = "vocalware"
         
         if audio_url:
             # Generate a UUID for the file name
-            unique_filename = f"vocalware-{uuid.uuid4()}.mp3"
+            unique_filename = f"{file_name}-{uuid.uuid4()}.mp3"
             if download_audio(audio_url, unique_filename):
                 audio_file_name = upload_audio_to_anki(unique_filename)
                 if audio_file_name:
